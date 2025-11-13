@@ -1,0 +1,5 @@
+{
+  "name": "SMART Expense Tracker & BUDGET Manager ",
+  "description": "A smart expense management web application that uses Gemini API to automatically extract data from receipts. Features include expense tracking, budget setting, currency selection, and an interactive dashboard with charts.",
+  "requestFramePermissions": []
+}
