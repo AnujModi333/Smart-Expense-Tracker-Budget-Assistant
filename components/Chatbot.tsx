@@ -37,13 +37,16 @@ export const Chatbot: React.FC<ChatbotProps> = ({ messages, setMessages, onClear
         if (!trimmedInput) return;
 
         const userMessage: ChatMessage = { sender: 'user', text: trimmedInput };
+        const currentChatHistory = messages; // History before adding the new message
         const newMessages = [...messages, userMessage];
+        
         setMessages(newMessages);
         setInput('');
         setIsLoading(true);
 
         try {
-            const response = await getChatbotResponse(newMessages, trimmedInput);
+            // Pass the history BEFORE the new user message to the API
+            const response = await getChatbotResponse(currentChatHistory, trimmedInput);
             const botMessage: ChatMessage = { sender: 'bot', text: response };
             setMessages([...newMessages, botMessage]);
         } catch (error) {

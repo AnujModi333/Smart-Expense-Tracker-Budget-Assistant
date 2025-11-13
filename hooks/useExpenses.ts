@@ -36,6 +36,17 @@ const getInitialChatHistory = (): ChatMessage[] => {
     return saved ? JSON.parse(saved) : [initialBotMessage];
 };
 
+const LOCAL_STORAGE_KEYS = [
+    'expenses',
+    'budget',
+    'currency',
+    'categoryBudgets',
+    'exchangeRates',
+    'calculatorHistory',
+    'theme',
+    'chatHistory',
+];
+
 
 export const useExpenses = () => {
     const [expenses, setExpenses] = useState<Expense[]>(getInitialExpenses);
@@ -184,14 +195,9 @@ export const useExpenses = () => {
     }, []);
 
     const resetAllData = useCallback(() => {
-        localStorage.removeItem('expenses');
-        localStorage.removeItem('budget');
-        localStorage.removeItem('currency');
-        localStorage.removeItem('categoryBudgets');
-        localStorage.removeItem('exchangeRates');
-        localStorage.removeItem('calculatorHistory');
-        localStorage.removeItem('theme');
-        localStorage.removeItem('chatHistory');
+        LOCAL_STORAGE_KEYS.forEach(key => {
+            localStorage.removeItem(key);
+        });
         window.location.reload();
     }, []);
     
